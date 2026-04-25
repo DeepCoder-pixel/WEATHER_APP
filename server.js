@@ -19,17 +19,6 @@ app.use(express.static(__dirname));
 app.get("/weather", async (req, res) => {
   const city = req.query.city;
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "weather.html"));
-});
-
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
   if (!city) {
     return res.status(400).json({ error: "City is required" });
   }
@@ -55,6 +44,13 @@ app.listen(PORT, () => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "weather.html"));
+});
+
+
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
