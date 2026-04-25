@@ -383,7 +383,7 @@
 
     try {
       // Mirrors your Python: ?q={city}&appid={api_key}&units=metric
-      const url = `http://localhost:3000/weather?city=${encodeURIComponent(city)}`;
+      const url = "https://weather-app-7vx4.onrender.com/weather?city=" + encodeURIComponent(city);
       const res  = await fetch(url);
       const data = await res.json();
 
