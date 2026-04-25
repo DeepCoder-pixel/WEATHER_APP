@@ -1,3 +1,8 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import express from "express";
 import axios from "axios";
 import cors from "cors";
@@ -7,16 +12,23 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
+app.use(express.static(__dirname));
+
+
+// API route
+app.get("/weather", async (req, res) => {
+  const city = req.query.city;
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "weather.html"));
+});
+
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// API route
-app.get("/weather", async (req, res) => {
-  const city = req.query.city;
 
   if (!city) {
     return res.status(400).json({ error: "City is required" });
